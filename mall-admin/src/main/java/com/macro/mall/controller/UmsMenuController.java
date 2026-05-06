@@ -101,19 +101,4 @@ public class UmsMenuController {
             return CommonResult.failed();
         }
     }
-
-    @ApiOperation("批量修改菜单显示状态（测试用）")
-    @RequestMapping(value = "/batchUpdateHidden", method = RequestMethod.POST)
-    @ResponseBody
-    public CommonResult batchUpdateHidden(@RequestBody List<Long> ids, @RequestParam("hidden") Integer hidden) {
-        // 注意：这里直接调用实现类的方法，用于测试双向分析
-        com.macro.mall.service.impl.UmsMenuServiceImpl impl = 
-            (com.macro.mall.service.impl.UmsMenuServiceImpl) menuService;
-        int count = impl.batchUpdateHidden(ids, hidden);
-        if (count > 0) {
-            return CommonResult.success(count);
-        } else {
-            return CommonResult.failed();
-        }
-    }
 }
