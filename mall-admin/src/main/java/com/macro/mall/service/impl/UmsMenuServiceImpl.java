@@ -88,7 +88,20 @@ public class UmsMenuServiceImpl implements UmsMenuService {
         UmsMenu umsMenu = new UmsMenu();
         umsMenu.setId(id);
         umsMenu.setHidden(hidden);
+        umsMenu.setUpdateTime(new Date());
         return menuMapper.updateByPrimaryKeySelective(umsMenu);
+    }
+
+    /**
+     * 测试方法：批量更新菜单隐藏状态
+     * 用于测试双向调用链分析
+     */
+    public int batchUpdateHidden(List<Long> ids, Integer hidden) {
+        int count = 0;
+        for (Long id : ids) {
+            count += updateHidden(id, hidden);
+        }
+        return count;
     }
 
     /**
